@@ -1,1 +1,6 @@
 .env
+outputs/
+uploads/
+__pycache__/
+.venv/
+*.pyc
