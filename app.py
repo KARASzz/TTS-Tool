@@ -12,6 +12,7 @@ import httpx
 from dotenv import load_dotenv
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT_DIR = ROOT / "outputs"
@@ -21,6 +22,7 @@ UPLOAD_DIR.mkdir(exist_ok=True)
 load_dotenv(ROOT / ".env")
 
 app = FastAPI(title="双引擎语音合成工具")
+app.mount("/assets", StaticFiles(directory=ROOT / "assets"), name="assets")
 
 MIMO_BASE_URL = os.getenv("MIMO_BASE_URL", "https://api.xiaomimimo.com/v1").rstrip("/")
 VOLC_TTS_URL = os.getenv("VOLC_TTS_URL", "https://openspeech.bytedance.com/api/v3/plan/tts/unidirectional")
